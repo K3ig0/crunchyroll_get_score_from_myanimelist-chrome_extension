@@ -1,0 +1,20 @@
+{
+  "name": "Crunchyroll - Anime Score from MyAnimeList",
+  "description": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by community of MyAnimelist.net. This is a fan-made extension",
+  "action": {},
+  "manifest_version": 3,
+  "version": "0.1",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.crunchyroll.com/*",
+    "*://*.myanimelist.net/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
