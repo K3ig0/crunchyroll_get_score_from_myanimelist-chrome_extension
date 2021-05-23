@@ -11,7 +11,6 @@ function setAnimeScore() {
   var animeEntries = document.getElementById("main_content").getElementsByClassName("series-title");
   for (var i = 0; i < animeEntries.length; i++) {
     chrome.storage.local.get([animeEntries[i].textContent], function(animeScoreAndId) {
-      var title = Object.entries(animeScoreAndId)[0][0];
       var id = Object.entries(animeScoreAndId)[0][1].animeId;
       var score = Object.entries(animeScoreAndId)[0][1].score;
       if (document.getElementById(id).children[0].children[0].children[2].textContent.indexOf('Score') === -1) {
@@ -19,7 +18,6 @@ function setAnimeScore() {
       }
     });
   }
-  return animeTitles;
 }
 
 chrome.webNavigation.onCompleted.addListener(function(tab) {
