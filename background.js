@@ -62,7 +62,12 @@ function getAnimeTitlesPendingToGetScore() {
   var animeEntries = document.getElementById("main_content").getElementsByClassName("series-title");
   for (var i = 0; i < animeEntries.length; i++) {
     if (animeEntries[i].parentElement.children[2].textContent.indexOf("| Score: ") === -1) {
-      animeTitlesToId[animeEntries[i].textContent] = animeEntries[i].parentElement.parentElement.parentElement.id;
+      var id = animeEntries[i].parentElement.parentElement.parentElement.id;
+      if (document.getElementById(id).children[0].children[0].children[2].textContent.indexOf("| Score: ") === -1) {
+        animeTitlesToId[animeEntries[i].textContent] = animeEntries[i].parentElement.parentElement.parentElement.id;
+      } else { // bug Crunchyroll: sometimes duplicates the anime entry, in this case then copy the score from the duplicated one
+        animeEntries[i].parentElement.children[2].textContent = document.getElementById(id).children[0].children[0].children[2].textContent;
+      }
     }
   }
   return animeTitlesToId;
