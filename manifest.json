@@ -9,7 +9,8 @@
     "tabs",
     "webNavigation",
     "scripting",
-    "storage"
+    "storage",
+    "alarms"
   ],
   "host_permissions": [
     "*://*.crunchyroll.com/*",
