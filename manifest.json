@@ -1,5 +1,5 @@
 {
-  "name": "Crunchyroll - Get Anime Score from MyAnimeList",
+  "name": "Crunchyroll - Anime Score from MyAnimeList",
   "description": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by community of MyAnimelist.net. This is a fan-made extension",
   "action": {},
   "manifest_version": 3,
