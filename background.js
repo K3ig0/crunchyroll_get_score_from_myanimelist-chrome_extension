@@ -78,7 +78,6 @@ function getAnimeTitlesPendingToGetScore() {
       } else { // bug Crunchyroll: sometimes duplicates the anime entry, in this case then copy the score from the duplicated one
         animeEntries[i].parentElement.children[2].textContent = document.getElementById(id).children[0].children[0].children[2].textContent;
       }
-      break; // delete
     }
   }
   return animeTitlesToId;
@@ -91,7 +90,9 @@ function showAnimeScore() {
       var id = Object.entries(animeScoreAndId)[0][1].animeId;
       var score = Object.entries(animeScoreAndId)[0][1].score;
       if (document.getElementById(id).children[0].children[0].children[2].textContent.indexOf("| Score: ") === -1) {
-        document.getElementById(id).children[0].children[0].children[2].textContent = document.getElementById(id).children[0].children[0].children[2].textContent + "| Score: " + score;
+        var textBelowTitle = document.getElementById(id).children[0].children[0].children[2].textContent;
+        textBelowTitle = textBelowTitle.replace(/Ep (\d+).*/, "Ep $1 "); // in the "/anime/updated" endpoint replace the hours ago text in order to show the score
+        document.getElementById(id).children[0].children[0].children[2].textContent = textBelowTitle + "| Score: " + score;
       }
     });
   }
