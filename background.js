@@ -4,7 +4,11 @@ chrome.webNavigation.onCompleted.addListener(function(tab) {
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
   chrome.storage.local.get(["tabId"], function(data) {
-    this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(data.tabId);
+    if (data.tabId) {
+      this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(data.tabId);
+    } else {
+      chrome.alarms.clearAll();
+    }
   });
 });
 
@@ -35,26 +39,38 @@ function checkNewAnimeTitlesPendingToGetStoreAndRequestScore(tabId) {
 function requestScoresToMyAnimeListIfNotCachedAndShow(animeTitlesToId, tabId) {
   if (animeTitlesToId && animeTitlesToId.length > 0 && animeTitlesToId[0].result) {
     for (const [animeTitle, animeId] of Object.entries(animeTitlesToId[0].result)) {
-      getDataFromLocalStorage(['animeTitle']).then(function(animeScoreAndId) {
-        var cachedScore = Object.entries(animeScoreAndId)[0][1].score;
-        chrome.scripting.executeScript({
-          target: { tabId: tabId },
-          function: showAnimeScore
-        });
-      }).catch(this.requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId));
+      chrome.storage.local.get([animeTitle], function(animeScoreAndId) {
+        if (animeScoreAndId && Object.entries(animeScoreAndId)[0] && Object.entries(animeScoreAndId)[0][1] && Object.entries(animeScoreAndId)[0][1].score !== '?') {
+          const cachedScore = Object.entries(animeScoreAndId)[0][1].score;
+          console.log("[cached] " + animeTitle + " " + cachedScore);
+          chrome.scripting.executeScript({
+            target: { tabId: tabId },
+            function: showAnimeScore
+          });
+        } else {
+          this.requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId);
+        }
+      });
     };
   }
 }
 
 function requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId) {
-  fetch("https://myanimelist.net/search/all?cat=all&q=" + encodeURIComponent(animeTitle.trim()))
-  .then(response => response.text())
+  fetch("https://myanimelist.net/search/all?cat=all&q=" + encodeURIComponent(animeTitle.trim()), {
+    mode: 'no-cors'
+  }).then(response => response.text())
   .then(result => {
-    if (result) {
-      var score = /Scored (\d\.\d+)/g.exec(result)[1];
-      console.log("[new] "  + animeTitle + " " + score);
-      chrome.storage.local.set({ [animeTitle]: { animeId, score } });
-    } else {
+    try {
+      const animeEntriesIndex = result.indexOf('<h2 id="anime">Anime</h2>');
+      const animeEntries = result.substring(animeEntriesIndex);
+      const scores = /Scored (\d\.\d+)/g.exec(animeEntries);
+      if (scores.length > 1) {
+        const score = scores[1];
+        console.log("[new] "  + animeTitle + " " + score);
+        chrome.storage.local.set({ [animeTitle]: { animeId, score } });
+      }
+    } catch(ex) {
+      console.error(ex);
       chrome.storage.local.set({ [animeTitle]: { animeId, score: "?" } });
     }
     chrome.scripting.executeScript({
@@ -68,11 +84,11 @@ function requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId) 
 // Functions called from activeTab:
 
 function getAnimeTitlesPendingToGetScore() {
-  var animeTitlesToId = {};
-  var animeEntries = document.getElementById("main_content").getElementsByClassName("series-title");
+  const animeTitlesToId = {};
+  const animeEntries = document.getElementById("main_content").getElementsByClassName("series-title");
   for (var i = 0; i < animeEntries.length; i++) {
     if (animeEntries[i].parentElement.children[2].textContent.indexOf("| Score: ") === -1) {
-      var id = animeEntries[i].parentElement.parentElement.parentElement.id;
+      const id = animeEntries[i].parentElement.parentElement.parentElement.id;
       if (document.getElementById(id).children[0].children[0].children[2].textContent.indexOf("| Score: ") === -1) {
         animeTitlesToId[animeEntries[i].textContent] = animeEntries[i].parentElement.parentElement.parentElement.id;
       } else { // bug Crunchyroll: sometimes duplicates the anime entry, in this case then copy the score from the duplicated one
@@ -84,29 +100,17 @@ function getAnimeTitlesPendingToGetScore() {
 }
 
 function showAnimeScore() {
-  var animeEntries = document.getElementById("main_content").getElementsByClassName("series-title");
+  const animeEntries = document.getElementById("main_content").getElementsByClassName("series-title");
   for (var i = 0; i < animeEntries.length; i++) {
     chrome.storage.local.get([animeEntries[i].textContent], function(animeScoreAndId) {
-      var id = Object.entries(animeScoreAndId)[0][1].animeId;
-      var score = Object.entries(animeScoreAndId)[0][1].score;
+      const id = Object.entries(animeScoreAndId)[0][1].animeId;
+      const score = Object.entries(animeScoreAndId)[0][1].score;
       if (document.getElementById(id).children[0].children[0].children[2].textContent.indexOf("| Score: ") === -1) {
         var textBelowTitle = document.getElementById(id).children[0].children[0].children[2].textContent;
         textBelowTitle = textBelowTitle.replace(/Ep (\d+).*/, "Ep $1 "); // in the "/anime/updated" endpoint replace the hours ago text in order to show the score
         document.getElementById(id).children[0].children[0].children[2].textContent = textBelowTitle + "| Score: " + score;
+        //console.debug(textBelowTitle + ' ' + score);
       }
     });
   }
-}
-
-function getDataFromLocalStorage(sKey) {
-  return new Promise(function(resolve, reject) {
-    chrome.storage.local.get(sKey, function(items) {
-      if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError.message);
-        reject(chrome.runtime.lastError.message);
-      } else {
-        resolve(items[sKey]);
-      }
-    });
-  });
 }
