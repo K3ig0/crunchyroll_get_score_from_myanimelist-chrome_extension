@@ -2,7 +2,9 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "action": {},
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
   "manifest_version": 3,
   "version": "0.1",
   "permissions": [
