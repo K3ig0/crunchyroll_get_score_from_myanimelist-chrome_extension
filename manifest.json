@@ -1,6 +1,7 @@
 {
-  "name": "Crunchyroll - Anime Score from MyAnimeList",
-  "description": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by community of MyAnimelist.net. This is a fan-made extension",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
   "action": {},
   "manifest_version": 3,
   "version": "0.1",
