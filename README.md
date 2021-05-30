@@ -8,8 +8,12 @@
 4) The score is requested to MyAnimeList.net -it will be cached-.
 5) Pick an Anime and enjoy it!
 
-> <img src="./showcase/showcase1.jpg">
-
-> <img src="./showcase/showcase2.jpg">
-
-> <img src="./showcase/showcase3.jpg">
+<div align="center">
+	<img src="./showcase/showcase1.jpg">
+</div>
+<div align="center">
+	<img src="./showcase/showcase2.jpg">
+</div>
+<div align="center">
+	<img src="./showcase/showcase3.jpg">
+</div>
