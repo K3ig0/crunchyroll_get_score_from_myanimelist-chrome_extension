@@ -7,7 +7,7 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
     if (data.tabId) {
       this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(data.tabId);
     } else {
-      chrome.alarms.clearAll();
+      chrome.alarms.clear("checkCrunchyrollNewAnime");
     }
   });
 });
@@ -28,7 +28,7 @@ function checkNewAnimeTitlesPendingToGetStoreAndRequestScore(tabId) {
     },
     (animeTitlesToId) => {
       if (chrome.runtime.lastError) {
-        chrome.alarms.clearAll();
+        chrome.alarms.clear("checkCrunchyrollNewAnime");
       } else {
         this.requestScoresToMyAnimeListIfNotCachedAndShow(animeTitlesToId, tabId);
       }
