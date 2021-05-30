@@ -1,4 +1,6 @@
-<img src="./logo/logo.png">
+<div align="center">
+	<img src="./logo/logo.png">
+</div>
 
 1) Visit Crunchyroll.com
 2) Browse Anime / Shows
