@@ -8,15 +8,21 @@
 4) The score is requested to MyAnimeList.net -it will be cached-.
 5) Pick an Anime and enjoy it!
 
+---
+
 > Showcase 1 (standard view):
 <div align="center">
 	<img src="./showcase/showcase1.jpg">
 </div>
 
+---
+
 > Showcase 2 (clicking on the extension icon):
 <div align="center">
 	<img src="./showcase/showcase2.jpg">
 </div>
+
+---
 
 > Showcase 3 (score obtained from MyAnimeList.net):
 <div align="center">
