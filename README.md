@@ -9,12 +9,12 @@
 5) Pick an Anime and enjoy it!
 
 > Showcase 1 (standard view):
-<div>
+<div align="center">
 	<img src="./showcase/showcase1.jpg">
 </div>
 
 > Showcase 2 (clicking on the extension icon):
-<div>
+<div align="center">
 	<img src="./showcase/showcase2.jpg">
 </div>
 
