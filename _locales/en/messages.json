@@ -1,10 +1,10 @@
 {
     "appName": {
       "message": "Crunchyroll - Anime Score from MyAnimeList",
-      "description": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by the community of MyAnimeList.net."
+      "description": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by the community of MyAnimeList.net"
     },
     "appDesc": {
-      "message": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by the community of MyAnimeList.net.",
+      "message": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by the community of MyAnimeList.net",
       "description": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by the community of MyAnimeList.net which will be showed thanks to this extension! This is a fan-made extension"
     }
   }
