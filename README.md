@@ -2,9 +2,8 @@
 	<img src="./logo/logo.png">
 </div>
 
-> Available on Chrome Web Store:
-
-https://chrome.google.com/webstore/detail/crunchyroll-anime-score-f/gmbngnmhdghglmgofmeikkaeipbeoknh?hl=en
+> Available on Chrome Web Store:  
+> https://chrome.google.com/webstore/detail/crunchyroll-anime-score-f/gmbngnmhdghglmgofmeikkaeipbeoknh?hl=en
 
 1) Visit Crunchyroll.com
 2) Browse Anime / Shows
