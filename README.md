@@ -2,6 +2,9 @@
 	<img src="./logo/logo.png">
 </div>
 
+> Available on Chrome Web Store:
+https://chrome.google.com/webstore/detail/crunchyroll-anime-score-f/gmbngnmhdghglmgofmeikkaeipbeoknh?hl=en
+
 1) Visit Crunchyroll.com
 2) Browse Anime / Shows
 3) Thanks to this extension you will be able to see the score of each Anime
