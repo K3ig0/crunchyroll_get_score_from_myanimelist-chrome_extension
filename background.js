@@ -2,23 +2,24 @@ chrome.webNavigation.onCompleted.addListener(function(tab) {
   this.ifCrunchyRollThenRequestScoresFromMyAnimeList(tab);
 });
 
-chrome.alarms.onAlarm.addListener(function(alarm) {
-  chrome.storage.local.get(["tabId"], function(data) {
-    if (data.tabId) {
-      this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(data.tabId);
-    } else {
-      chrome.alarms.clear("checkCrunchyrollNewAnime");
-    }
-  });
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  console.debug("New anime entries: " + request.newAnimeEntries);
+  this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(sender.tab.id);
 });
 
 function ifCrunchyRollThenRequestScoresFromMyAnimeList(tab) {
   if (tab && tab.frameId==0 && tab.url.indexOf("crunchyroll.com") != -1 && tab.url.indexOf("anime") != -1) {
-    console.log("Crunchyroll - Get Anime score from MyAnimeList.net - Requesting scores...");
+    console.debug("Crunchyroll - Get Anime score from MyAnimeList.net - Requesting scores...");
+    this.createObserverOnDOM(tab.tabId);
     this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(tab.tabId);
-    chrome.storage.local.set({ ["tabId"]: tab.tabId });
-    chrome.alarms.create("checkCrunchyrollNewAnime", {delayInMinutes: 0.1, periodInMinutes: 0.1});
   }
+}
+
+function createObserverOnDOM(tabId) {
+  chrome.scripting.executeScript({
+    target: { tabId: tabId },
+    function: _createObserverOnDOM
+  });
 }
 
 function checkNewAnimeTitlesPendingToGetStoreAndRequestScore(tabId) {
@@ -27,9 +28,7 @@ function checkNewAnimeTitlesPendingToGetStoreAndRequestScore(tabId) {
       function: getAnimeTitlesPendingToGetScore
     },
     (animeTitlesToId) => {
-      if (chrome.runtime.lastError) {
-        chrome.alarms.clear("checkCrunchyrollNewAnime");
-      } else {
+      if (!chrome.runtime.lastError) {
         this.requestScoresToMyAnimeListIfNotCachedAndShow(animeTitlesToId, tabId);
       }
     }
@@ -42,7 +41,7 @@ function requestScoresToMyAnimeListIfNotCachedAndShow(animeTitlesToId, tabId) {
       chrome.storage.local.get([animeTitle], function(animeScoreAndId) {
         if (animeScoreAndId && Object.entries(animeScoreAndId)[0] && Object.entries(animeScoreAndId)[0][1] && Object.entries(animeScoreAndId)[0][1].score !== '?') {
           const cachedScore = Object.entries(animeScoreAndId)[0][1].score;
-          console.log("[cached] " + animeTitle + " " + cachedScore);
+          console.debug("[cached] " + animeTitle + " " + cachedScore);
           chrome.scripting.executeScript({
             target: { tabId: tabId },
             function: showAnimeScore
@@ -66,7 +65,7 @@ function requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId) 
       const scores = /Scored (\d\.\d+)/g.exec(animeEntries);
       if (scores.length > 1) {
         const score = scores[1];
-        console.log("[new] "  + animeTitle + " " + score);
+        console.debug("[new] "  + animeTitle + " " + score);
         chrome.storage.local.set({ [animeTitle]: { animeId, score } });
       }
     } catch(ex) {
@@ -81,7 +80,20 @@ function requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId) 
 }
 
 
+
 // Functions called from activeTab:
+
+function _createObserverOnDOM() {
+    const targetNode = document.querySelector("#main_content");
+    const config = { childList: true, subtree: true, attributes: false};
+    const callback = function(mutationsList, observer) {
+      if (mutationsList.length > 1) {
+          chrome.runtime.sendMessage({newAnimeEntries: mutationsList.length});
+      }
+    }
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+}
 
 function getAnimeTitlesPendingToGetScore() {
   const animeTitlesToId = {};
