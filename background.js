@@ -3,13 +3,11 @@ chrome.webNavigation.onCompleted.addListener(function(tab) {
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  console.debug("New anime entries: " + request.newAnimeEntries);
   this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(sender.tab.id);
 });
 
 function ifCrunchyRollThenRequestScoresFromMyAnimeList(tab) {
   if (tab && tab.frameId==0 && tab.url.indexOf("crunchyroll.com") != -1 && tab.url.indexOf("anime") != -1) {
-    console.debug("Crunchyroll - Get Anime score from MyAnimeList.net - Requesting scores...");
     this.createObserverOnDOM(tab.tabId);
     this.checkNewAnimeTitlesPendingToGetStoreAndRequestScore(tab.tabId);
   }
@@ -121,7 +119,6 @@ function showAnimeScore() {
         var textBelowTitle = document.getElementById(id).children[0].children[0].children[2].textContent;
         textBelowTitle = textBelowTitle.replace(/Ep (\d+).*/, "Ep $1 "); // in the "/anime/updated" endpoint replace the hours ago text in order to show the score
         document.getElementById(id).children[0].children[0].children[2].textContent = textBelowTitle + "| Score: " + score;
-        //console.debug(textBelowTitle + ' ' + score);
       }
     });
   }
