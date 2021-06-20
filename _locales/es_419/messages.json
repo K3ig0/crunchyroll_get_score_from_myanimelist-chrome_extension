@@ -20,6 +20,9 @@
     "optionRestoreToDefaultSettings": {
       "message": "Restaurar valores por defecto"
     },
+    "optionClearScoreCache": {
+      "message": "Vaciar caché de puntuaciones"
+    },
     "optionsSaved": {
       "message": "Opciones guardadas"
     }

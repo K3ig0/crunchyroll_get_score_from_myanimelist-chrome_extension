@@ -1,4 +1,4 @@
-function save_options() {
+function saveCurrentOptions() {
   var fadeScore = document.getElementById('fade_score').value;
   var fadeOpacity = document.getElementById('fade_opacity').value;
   chrome.storage.sync.set({
@@ -13,7 +13,7 @@ function save_options() {
   });
 }
 
-function restore_last_saved_options() {
+function restoreLastSavedOptions() {
   // Use default values if not defined
   chrome.storage.sync.get({
     fadeScore: 7.00,
@@ -24,12 +24,17 @@ function restore_last_saved_options() {
   });
 }
 
-function restore_initial_default_options() {
+function restoreInitialDefaultOptions() {
   document.getElementById('fade_score').value = 7.00;
   document.getElementById('fade_opacity').value = 0.1;
-  save_options();
+  saveCurrentOptions();
+}
+
+function clearChromeLocalStorage() {
+  chrome.storage.local.clear();
 }
   
-document.addEventListener('DOMContentLoaded', restore_last_saved_options);
-document.getElementById('save').addEventListener('click', save_options);
-document.getElementById('restore').addEventListener('click', restore_initial_default_options);
+document.addEventListener('DOMContentLoaded', restoreLastSavedOptions);
+document.getElementById('save').addEventListener('click', saveCurrentOptions);
+document.getElementById('restore').addEventListener('click', restoreInitialDefaultOptions);
+document.getElementById('clearCache').addEventListener('click', clearChromeLocalStorage);

@@ -22,6 +22,9 @@
     "optionRestoreToDefaultSettings": {
       "message": "Restore to default settings"
     },
+    "optionClearScoreCache": {
+      "message": "Clear score cache"
+    },
     "optionsSaved": {
       "message": "Options saved"
     }

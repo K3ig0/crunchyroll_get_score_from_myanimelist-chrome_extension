@@ -9,7 +9,7 @@
       "message": "Accede a Crunchyroll y ve las puntuaciones"
     },
     "optionFadeScore": {
-      "message": "Reducir opacidad si la puntuación del anime es menor que:"
+      "message": "Reducir opacidad para anime con puntuación menor a:"
     },
     "optionFadeOpacity": {
       "message": "Valor de la opacidad:"
@@ -19,6 +19,9 @@
     },
     "optionRestoreToDefaultSettings": {
       "message": "Restaurar valores por defecto"
+    },
+    "optionClearScoreCache": {
+      "message": "Vaciar caché de puntuaciones"
     },
     "optionsSaved": {
       "message": "Opciones guardadas"
