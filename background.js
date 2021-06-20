@@ -122,12 +122,19 @@ function showAnimeScore() {
       const score = Object.entries(animeScoreAndId)[0][1].score;
       const doc = document.getElementById(id);
       if (doc.children[0].children[0].children[2].textContent.indexOf("| Score: ") === -1) {
-        if (parseFloat(score) < 7.00) {
-          doc.getElementsByTagName('img')[0].style.opacity = "0.25";
-        }
         var textBelowTitle = doc.children[0].children[0].children[2].textContent;
         textBelowTitle = textBelowTitle.replace(/Ep (\d+).*/, "Ep $1 "); // in the "/anime/updated" endpoint replace the hours ago text in order to show the score
         doc.children[0].children[0].children[2].textContent = textBelowTitle + "| Score: " + score;
+
+        // fade low score shows:
+        chrome.storage.sync.get({
+          fadeScore: 7.00, // default values
+          fadeOpacity: 0.1
+        }, function(items) {
+          if (parseFloat(score) < parseFloat(items.fadeScore)) {
+            doc.getElementsByTagName('img')[0].style.opacity = parseFloat(items.fadeOpacity);
+          }
+        });        
       }
     });
   }

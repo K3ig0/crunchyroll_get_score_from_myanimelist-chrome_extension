@@ -23,5 +23,9 @@
     "16": "/logo/logo.png",
     "48": "/logo/logo.png",
     "128": "/logo/logo.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
   }
 }
