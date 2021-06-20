@@ -11,6 +11,10 @@
 4) The score is requested to MyAnimeList.net -it will be cached-.
 5) Pick an Anime and enjoy it!
 
+Right click on the extension icon to access the Options:
+- Fade low score Anime
+- Clear Anime score cache 
+
 ---
 
 > Showcase 1 (standard view):
