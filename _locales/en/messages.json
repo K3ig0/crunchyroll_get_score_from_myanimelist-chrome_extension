@@ -7,8 +7,11 @@
       "message": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by the community of MyAnimeList.net",
       "description": "Go to Crunchyroll.com, explore anime and pick one based on the score provided by the community of MyAnimeList.net which will be showed thanks to this extension! This is a fan-made extension"
     },
+    "visitCrunchyrollAndViewAnimeScores": {
+      "message": "Visit Crunchyroll and view anime scores"
+    },
     "optionFadeScore": {
-      "message": "Decrease opacity if the score is lower than:"
+      "message": "Decrease opacity for anime which score is lower than:"
     },
     "optionFadeOpacity": {
       "message": "Opacity value:"
