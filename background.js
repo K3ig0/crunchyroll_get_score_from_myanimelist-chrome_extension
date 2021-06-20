@@ -120,10 +120,14 @@ function showAnimeScore() {
     chrome.storage.local.get([animeEntries[i].textContent], function(animeScoreAndId) {
       const id = Object.entries(animeScoreAndId)[0][1].animeId;
       const score = Object.entries(animeScoreAndId)[0][1].score;
-      if (document.getElementById(id).children[0].children[0].children[2].textContent.indexOf("| Score: ") === -1) {
-        var textBelowTitle = document.getElementById(id).children[0].children[0].children[2].textContent;
+      const doc = document.getElementById(id);
+      if (doc.children[0].children[0].children[2].textContent.indexOf("| Score: ") === -1) {
+        if (parseFloat(score) < 7.00) {
+          doc.getElementsByTagName('img')[0].style.opacity = "0.25";
+        }
+        var textBelowTitle = doc.children[0].children[0].children[2].textContent;
         textBelowTitle = textBelowTitle.replace(/Ep (\d+).*/, "Ep $1 "); // in the "/anime/updated" endpoint replace the hours ago text in order to show the score
-        document.getElementById(id).children[0].children[0].children[2].textContent = textBelowTitle + "| Score: " + score;
+        doc.children[0].children[0].children[2].textContent = textBelowTitle + "| Score: " + score;
       }
     });
   }
