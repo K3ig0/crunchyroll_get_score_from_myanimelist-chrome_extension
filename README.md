@@ -38,7 +38,7 @@ Right click on the extension icon to access the Options:
 
 ---
 
-> Showcase 4 (fade low score shows setting the opacity in the options):
+> Showcase 4 (options menu):
 <div align="center">
 	<img src="./showcase/showcase4.jpg">
 </div>
