@@ -6,7 +6,7 @@ function save_options() {
     fadeOpacity
   }, function() {
     var status = document.getElementById('status');
-    status.textContent = 'Options saved.';
+    status.textContent = chrome.i18n.getMessage('optionsSaved');
     setTimeout(function() {
       status.textContent = '';
     }, 3000);

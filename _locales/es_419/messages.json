@@ -4,5 +4,20 @@
     },
     "appDesc": {
       "message": "Accede a Crunchyroll.com y elige un anime gracias a la puntuación proporcionada por la comunidad de MyAnimeList.net"
+    },
+    "optionFadeScore": {
+      "message": "Reducir opacidad si la puntuación es menor que:"
+    },
+    "optionFadeOpacity": {
+      "message": "Valor de la opacidad:"
+    },
+    "optionSave": {
+      "message": "Guardar"
+    },
+    "optionRestoreToDefaultSettings": {
+      "message": "Restaurar valores por defecto"
+    },
+    "optionsSaved": {
+      "message": "Opciones guardadas"
     }
   }
