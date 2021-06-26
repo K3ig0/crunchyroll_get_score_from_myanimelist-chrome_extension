@@ -32,6 +32,11 @@ function restoreInitialDefaultOptions() {
 
 function clearChromeLocalStorage() {
   chrome.storage.local.clear();
+  var status = document.getElementById('status');
+  status.textContent = chrome.i18n.getMessage('cacheCleared');
+  setTimeout(function() {
+    status.textContent = '';
+  }, 3000);
 }
   
 document.addEventListener('DOMContentLoaded', restoreLastSavedOptions);

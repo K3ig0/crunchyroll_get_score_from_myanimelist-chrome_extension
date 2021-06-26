@@ -57,8 +57,22 @@ function requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId) 
     mode: "no-cors"
   }).then(response => {
     if (response.status === 403) {
-      console.error("MyAnimeList.net access is temporarily disabled. Go to the site to enable it");
+      console.warn("MyAnimeList.net access is temporarily blocked. Go to the site to enable it");
+      chrome.notifications.create("MyAnimeList.net block", {
+          // chrome.i18n.getMessage is not working from service workers due to a bug
+          title: navigator.language.startsWith("es") ? "La puntuación del Anime no se puede mostrar" : "Anime score cannot be displayed",
+          message: navigator.language.startsWith("es") ? "1) Accede a MyAnimeList.net para desbloquear el sitio \n2) Refresca la página web de Crunchyroll para continuar viendo la puntuación de Anime" : "1) Visit MyAnimeList.net to unblock \n2) Refresh the Crunchyroll website to continue viewing the anime score",
+          iconUrl: '/logo/logo.png',
+          type: "basic"
+      });
+      chrome.action.setBadgeBackgroundColor({color: "#FF0000"});
+      chrome.action.setBadgeText({text: "⚿", tabId});
+      chrome.action.setPopup({popup: "popup/myanimelist_block.html", tabId});
       return;
+    } else {
+      chrome.notifications.clear("MyAnimeList.net block");
+      chrome.action.setBadgeText({text: "", tabId});
+      chrome.action.setPopup({popup: "popup/popup.html", tabId});
     }
     response.text().then(result => {
       try {

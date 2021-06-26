@@ -1,29 +1,35 @@
 {
-    "appName": {
-      "message": "Crunchyroll - Anime - Puntuación de MyAnimeList"
-    },
-    "appDesc": {
-      "message": "Accede a Crunchyroll.com y elige un anime gracias a la puntuación proporcionada por la comunidad de MyAnimeList.net"
-    },
-    "visitCrunchyrollAndViewAnimeScores": {
-      "message": "Accede a Crunchyroll y ve las puntuaciones"
-    },
-    "optionFadeScore": {
-      "message": "Reducir opacidad para anime con puntuación menor a:"
-    },
-    "optionFadeOpacity": {
-      "message": "Valor de la opacidad:"
-    },
-    "optionSave": {
-      "message": "Guardar"
-    },
-    "optionRestoreToDefaultSettings": {
-      "message": "Restaurar valores por defecto"
-    },
-    "optionClearScoreCache": {
-      "message": "Vaciar caché de puntuaciones"
-    },
-    "optionsSaved": {
-      "message": "Opciones guardadas"
-    }
+  "appName": {
+    "message": "Crunchyroll - Anime - Puntuación de MyAnimeList"
+  },
+  "appDesc": {
+    "message": "Accede a Crunchyroll.com y elige un anime gracias a la puntuación proporcionada por la comunidad de MyAnimeList.net"
+  },
+  "visitCrunchyrollAndViewAnimeScores": {
+    "message": "Accede a Crunchyroll y ve las puntuaciones"
+  },
+  "visitMyAnimeListToRemoveTheBlock": {
+    "message": "Accede a MyAnimeList.net para desbloquear"
+  },
+  "optionFadeScore": {
+    "message": "Reducir opacidad para anime con puntuación menor a:"
+  },
+  "optionFadeOpacity": {
+    "message": "Valor de la opacidad:"
+  },
+  "optionSave": {
+    "message": "Guardar"
+  },
+  "optionRestoreToDefaultSettings": {
+    "message": "Restaurar valores por defecto"
+  },
+  "optionClearScoreCache": {
+    "message": "Vaciar caché de puntuaciones"
+  },
+  "optionsSaved": {
+    "message": "Opciones guardadas"
+  },
+  "cacheCleared": {
+    "message": "Caché de puntuaciones vaciada"
   }
+}
