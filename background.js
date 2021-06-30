@@ -188,7 +188,6 @@ function showAnimeScore() {
       });
     }
   } else { // beta
-    console.debug("beta-show");
     const animeBetaEntries = document.getElementsByClassName("browse-card");
     for (var i = 0; i < animeBetaEntries.length; i++) {
       if (animeBetaEntries[i].innerText.indexOf("Score: ") === -1) {
