@@ -45,4 +45,11 @@ Right click on the extension icon to access the Options:
 
 ---
 
+> Showcase 5 (beta.crunchyroll support and score in color like metacritic):
+<div align="center">
+	<img src="./showcase/showcase5.jpg">
+</div>
+
+---
+
 <a href="https://www.buymeacoffee.com/CrunchyrollMAL" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
