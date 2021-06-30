@@ -111,7 +111,7 @@ function requestScoreToMyAnimeListAndShowAnimeScore(animeTitle, animeId, tabId) 
 // Functions called from activeTab:
 
 function _createObserverOnBetaDOM() {
-  const targetNode = document.querySelector(".erc-browse-cards-collection");
+  const targetNode = document.querySelector("#content");
   const config = { childList: true, subtree: true, attributes: false};
   const callback = function(mutationsList, observer) {
     if (mutationsList.length > 1) {
