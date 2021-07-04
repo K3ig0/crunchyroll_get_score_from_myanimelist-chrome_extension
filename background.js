@@ -155,11 +155,10 @@ function showAnimeScore() {
         const id = Object.entries(animeScoreAndId)[0][1].animeId;
         const score = Object.entries(animeScoreAndId)[0][1].score;
         const doc = document.getElementById(id);
-        const docScoreText = doc.children[0].children[0].children[2].textContent;
+        var docScoreText = doc.children[0].children[0].children[2].textContent;
         if (docScoreText.indexOf("| Score: ") === -1 || docScoreText.indexOf("| Score: ?") !== -1) {
-          var textBelowTitle = doc.children[0].children[0].children[2].textContent;
-          textBelowTitle = textBelowTitle.replace(/Ep (\d+).*/, "Ep $1 "); // in the "/anime/updated" endpoint replace the hours ago text in order to show the score
-          doc.children[0].children[0].children[2].textContent = textBelowTitle + "| Score: " + score;
+          docScoreText = docScoreText.replace(/Ep (\d+).*/, "Ep $1 "); // in the "/anime/updated" endpoint replace the hours ago text in order to show the score
+          doc.children[0].children[0].children[2].textContent = docScoreText + "| Score: " + score;
 
           // fade low score shows:
           chrome.storage.sync.get({
