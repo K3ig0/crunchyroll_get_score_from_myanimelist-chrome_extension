@@ -136,8 +136,8 @@ function getAnimeTitlesPendingToGetScore() {
     for (var i = 0; i < animeBetaEntries.length; i++) {
       const docText = animeBetaEntries[i].innerText;
       if (docText.indexOf("Score: ") === -1 || docText.indexOf("Score: ?") !== -1) {
-          if (animeBetaEntries[i].getElementsByClassName("c-browse-card__title")[0]) {
-            const title = animeBetaEntries[i].getElementsByClassName("c-browse-card__title")[0].innerText;
+          if (animeBetaEntries[i].getElementsByTagName('h4')[0]) {
+            const title = animeBetaEntries[i].getElementsByTagName('h4')[0].innerText;
             animeTitlesToId[title] = "beta";
           }
       }
@@ -177,9 +177,9 @@ function showAnimeScore() {
     for (var i = 0; i < animeBetaEntries.length; i++) {
       const docText = animeBetaEntries[i].innerText;
       if (docText.indexOf("Score: ") === -1 || docText.indexOf("Score: ?") !== -1) {
-        const doc = animeBetaEntries[i].getElementsByClassName("c-browse-card__title")[0];
+        const doc = animeBetaEntries[i].getElementsByTagName('h4')[0];
         if (doc) {
-          const img = animeBetaEntries[i].getElementsByClassName("c-browse-card__poster-wrapper")[0];
+          const img = animeBetaEntries[i].getElementsByTagName("figure")[0];
           chrome.storage.local.get([doc.innerText], function(animeScoreAndId) {
             const score = Object.entries(animeScoreAndId)[0][1].score;
             var background_color = parseFloat(score) < 5.00 ? "#f00" : parseFloat(score) < 7.50 ? "#fc3" : "#6c3";
